@@ -4,7 +4,7 @@
   <strong>Title:</strong>
   <%= @item.title %>
 </p>
-
+<%= image_tag(@item.image)  if @item.image.attached?%>
 <p>
   <strong>Description:</strong>
   <%= @item.description %>
