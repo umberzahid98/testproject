@@ -22,3 +22,7 @@ Things you may want to cover:
 * Deployment instructions
 
 * ...
+
+:inside confid/enviroment/production.rb
+  if you run this on heroku than you will out heroku URL in next line
+  config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
