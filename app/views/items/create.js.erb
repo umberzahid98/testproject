@@ -10,14 +10,19 @@
 )
 
 <%else%>
-    $("#mynewitem").modal('hide');
     $("#item-updated-errors").remove();
     $(".item_title").val('');
     $(".item_description").val('');
     $(".item_price").val('');
-    $(".item_price").val('');
+    $(".item_image").val('');
+
+
     $("#container_items").prepend('<%= j render @item %>');
-    $("#item_<%= @item.id %>").hide();
+    $("#item_<%=@item.id %>").hide();
+    $("#mynewitem").modal("hide");
+
+
+
 <%end%>
 
 
