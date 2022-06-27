@@ -13,4 +13,3 @@ class Item < ApplicationRecord
     errors.add(:image, 'is missing') if (image.attached?) == false
   end
 end
-

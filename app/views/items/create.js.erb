@@ -1,0 +1,23 @@
+<%if @item.errors.full_messages.any?%>
+  $("#item-updated-errors").empty().append(
+  `
+    <% if @item.errors.full_messages.any? %>
+      <% @item.errors.full_messages.each do |error_message| %>
+        <%= error_message  %> <br />
+      <% end %>
+    <% end %>
+  `
+)
+
+<%else%>
+    $("#mynewitem").modal('hide');
+    $("#item-updated-errors").remove();
+    $(".item_title").val('');
+    $(".item_description").val('');
+    $(".item_price").val('');
+    $(".item_price").val('');
+    $("#container_items").prepend('<%= j render @item %>');
+    $("#item_<%= @item.id %>").hide();
+<%end%>
+
+

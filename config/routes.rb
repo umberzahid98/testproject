@@ -3,6 +3,6 @@
 Rails.application.routes.draw do
   resources :items
   devise_for :users
-  root to: 'homes#index'
+  root to: 'items#index'
   get 'homes/about'
 end

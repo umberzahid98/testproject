@@ -6,6 +6,7 @@ class ItemsController < ApplicationController
   # GET /items or /items.json
   def index
     @items = Item.all
+    @item = Item.new
   end
 
   # GET /items/1 or /items/1.json
@@ -21,8 +22,7 @@ class ItemsController < ApplicationController
 
   # POST /items or /items.json
   def create
-    @item = Item.new(item_params)
-
+    @item = Item.create(item_params)
     respond_to do |format|
       if @item.save
         format.html { redirect_to item_url(@item), notice: 'Item was successfully created.' }
@@ -31,6 +31,7 @@ class ItemsController < ApplicationController
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @item.errors, status: :unprocessable_entity }
       end
+      format.js
     end
   end
 
@@ -44,6 +45,7 @@ class ItemsController < ApplicationController
         format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @item.errors, status: :unprocessable_entity }
       end
+      format.js
     end
   end
 
@@ -54,6 +56,7 @@ class ItemsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to items_url, notice: 'Item was successfully destroyed.' }
       format.json { head :no_content }
+      format.js
     end
   end
 
