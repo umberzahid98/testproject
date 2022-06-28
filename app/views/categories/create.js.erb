@@ -1,0 +1,20 @@
+<%if @category.errors.full_messages.any?%>
+  $("#category-updated-errors").empty().append(
+  `
+    <% if @category.errors.full_messages.any? %>
+      <% @category.errors.full_messages.each do |error_message| %>
+        <%= error_message  %> <br />
+      <% end %>
+    <% end %>
+  `
+)
+
+<%else%>
+    $("#newcategorymodal").modal('hide');
+    $("#category-updated-errors").remove();
+    $(".category_name").val('');
+    $("#container_categories").prepend('<%= j render @category %>');
+    $("#category_<%= @category.id %>").hide();
+<%end%>
+
+
