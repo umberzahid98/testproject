@@ -53,6 +53,12 @@
               <%= f.label :image%><br>
               <%= f.file_field :image, class: "form-control item_image"%>
             </div>
+            <div class="field">
+            <%= f.label :Category%><br>
+            <%= f.select :category_ids, options_from_collection_for_select(Category.all, :id, :name),class: "form-control item_category" ,prompt: "Select Category" %>
+
+            <%# <%= f.hidden_field :category_id, value: 1 %>
+            </div>
 
 
           </div>
