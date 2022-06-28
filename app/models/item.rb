@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Item < ApplicationRecord
+  has_and_belongs_to_many :categories
+
   has_one_attached :image
   validates :title, presence: true, uniqueness: true
   validates :description, presence: true
