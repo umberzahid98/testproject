@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_06_27_133436) do
+ActiveRecord::Schema.define(version: 2022_06_28_112624) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -39,11 +39,13 @@ ActiveRecord::Schema.define(version: 2022_06_27_133436) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "categories_items", id: false, force: :cascade do |t|
-    t.integer "category_id"
-    t.integer "item_id"
-    t.index ["category_id"], name: "index_categories_items_on_category_id"
-    t.index ["item_id"], name: "index_categories_items_on_item_id"
+  create_table "category_items", force: :cascade do |t|
+    t.integer "category_id", null: false
+    t.integer "item_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["category_id"], name: "index_category_items_on_category_id"
+    t.index ["item_id"], name: "index_category_items_on_item_id"
   end
 
   create_table "items", force: :cascade do |t|

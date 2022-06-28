@@ -1,4 +1,6 @@
+# category class
 class Category < ApplicationRecord
-  has_and_belongs_to_many :items
+  has_many :category_items
+  has_many :items, through: :category_items
   validates :name, presence: true, uniqueness: true
 end

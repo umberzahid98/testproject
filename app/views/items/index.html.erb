@@ -26,8 +26,8 @@
             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             <h4 class="modal-title" id="myModalLabel">Item</h4>
           </div>
-            <div id="item-updated-errors">
-                <div>Game on</div>
+            <div class="item_errors_div" id="item-updated-errors">
+
               <div>
                 <% if @item.errors.full_messages.any? %>
                   <% @item.errors.full_messages.each do |error_message| %>
@@ -55,11 +55,9 @@
             </div>
             <div class="field">
             <%= f.label :Category%><br>
-            <%= f.select :category_ids, options_from_collection_for_select(Category.all, :id, :name),class: "form-control item_category" ,prompt: "Select Category" %>
-
-            <%# <%= f.hidden_field :category_id, value: 1 %>
+            <%# <%= f.select :category_ids, options_from_collection_for_select(Category.all, :id, :name),class: "form-control item_category" ,prompt: "Select Category", multiple: true %>
+            <%= f.collection_select :category_ids, Category.all, :id, :name, {include_blank: "select category"},  {:multiple => true}  %>
             </div>
-
 
           </div>
           <div class="modal-footer">
