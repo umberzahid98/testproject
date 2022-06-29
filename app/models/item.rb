@@ -6,8 +6,6 @@ class Item < ApplicationRecord
   has_many :categories, through: :category_items
   # validates_associated :categories
 
-
-
   has_one_attached :image
   validates :title, presence: true, uniqueness: true
   validates :description, presence: true
@@ -25,8 +23,6 @@ class Item < ApplicationRecord
       errors.add(:category, 'is not selected')
     end
   end
-
-
 
   # def image_type
   #   errors.add(:image, 'is missing') if (image.attached?) == false

@@ -1,4 +1,6 @@
-#category controller
+# frozen_string_literal: true
+
+# category controller
 class CategoriesController < ApplicationController
   def index
     @categories = Category.all
@@ -6,16 +8,16 @@ class CategoriesController < ApplicationController
     @count = 0
   end
 
-   # GET /items/1 or /items/1.json
-   def show; end
+  # GET /items/1 or /items/1.json
+  def show; end
 
-   # GET /items/new
-   def new
-     @category = Category.new
-   end
+  # GET /items/new
+  def new
+    @category = Category.new
+  end
 
-   # GET /items/1/edit
-   def edit; end
+  # GET /items/1/edit
+  def edit; end
 
   def create
     @category = Category.create(category_params)
@@ -31,6 +33,7 @@ class CategoriesController < ApplicationController
       format.js
     end
   end
+
   private
 
   # Use callbacks to share common setup or constraints between actions.

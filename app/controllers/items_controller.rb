@@ -21,9 +21,8 @@ class ItemsController < ApplicationController
   def edit; end
 
   # POST /items or /items.json
-  def create
+  def create # rubocop:disable Metrics/MethodLength
     @item = Item.create(item_params)
-
     respond_to do |format|
       if @item.save
         format.html { redirect_to item_url(@item), notice: 'Item was successfully created.' }
