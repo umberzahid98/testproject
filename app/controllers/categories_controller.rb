@@ -19,7 +19,7 @@ class CategoriesController < ApplicationController
   # GET /items/1/edit
   def edit; end
 
-  def create
+  def create # rubocop:disable Metrics/MethodLength
     @category = Category.create(category_params)
 
     respond_to do |format|
