@@ -2,11 +2,10 @@
 <h1 class="text-center"><%= pluralize(@items.count, "Result")%></h1>
 
 
-<div class="container  row">
-<div class="col-md-1">
-<%= check_box_tag( "London") %>
-</div >
-<div class="col-md-11">
+<div class="container ">
+<%= @cat%>
+
+
 <table class="table table-dark table-striped">
   <thead>
     <tr>
@@ -30,7 +29,7 @@
     <%end%>
   </tbody>
 </table>
-</div>
+
 
 </div>
 
