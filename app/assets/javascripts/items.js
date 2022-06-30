@@ -6,6 +6,6 @@ function myFunction() {
 
 
 $("#mynewitemclose").click(function(){
-  debugger
+  // debugger
   $("#item-updated-errors").remove()
 })

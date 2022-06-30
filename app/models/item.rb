@@ -4,6 +4,7 @@
 class Item < ApplicationRecord
   has_many :category_items
   has_many :categories, through: :category_items
+  # after_save :hide_modal
   # validates_associated :categories
 
   has_one_attached :image
@@ -11,10 +12,17 @@ class Item < ApplicationRecord
   validates :description, presence: true
   validates :price, numericality: { only_float: true, greater_than: 0 }
   validate :save_object?
+
+
+
   # validate :no_category
   # validate :image_type
 
   private
+
+  # def hide_modal
+
+  # end
 
   def save_object?
     if Category.all.count.zero?

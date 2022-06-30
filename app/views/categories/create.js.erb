@@ -10,7 +10,8 @@
 )
 
 <%else%>
-    $("#newcategorymodal").modal('hide');
+    <%# $("#newcategorymodal").modal(hide); %>
+    $("#newcategorymodal").hide();
     $("#category-updated-errors").remove();
     $(".category_name").val('');
     $("#container_categories").prepend('<%= j render @category %>');

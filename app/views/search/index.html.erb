@@ -2,7 +2,11 @@
 <h1 class="text-center"><%= pluralize(@items.count, "Result")%></h1>
 
 
-<div class="container">
+<div class="container  row">
+<div class="col-md-1">
+<%= check_box_tag( "London") %>
+</div >
+<div class="col-md-11">
 <table class="table table-dark table-striped">
   <thead>
     <tr>
@@ -15,13 +19,18 @@
   </thead>
   <tbody>
     <% @items.each do |item|%>
-      <tr>
-      <%# rails will get the item id and take us to particular item by this link %>
-        <td><%= link_to item.title, item%></td>
-        <td><%= item.description.truncate_words(25)%></td>
-        <td><%= item.price%></td>
-      </tr>
+      <%if (@cat - item.categories.pluck(:name)).empty? %>
+        <tr>
+        <%# rails will get the item id and take us to particular item by this link %>
+          <td><%= link_to item.title, item%></td>
+          <td><%= item.description.truncate_words(25)%></td>
+          <td><%= item.price%></td>
+        </tr>
+      <%end%>
     <%end%>
   </tbody>
 </table>
 </div>
+
+</div>
+
