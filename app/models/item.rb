@@ -3,7 +3,7 @@
 # class of items that the admin will create
 class Item < ApplicationRecord
   has_many :category_items
-  has_many :categories, through: :category_items
+  has_many :categories, through: :category_items, dependent: :destroy
   # after_save :hide_modal
   # validates_associated :categories
 

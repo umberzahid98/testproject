@@ -1,0 +1,2 @@
+module InlineItemsHelper
+end

@@ -8,6 +8,11 @@ class ItemsController < ApplicationController
   def index
     @items = Item.all
     @item = Item.new
+
+    @inline_item = InlineItem.new
+
+
+
   end
 
   # GET /items/1 or /items/1.json

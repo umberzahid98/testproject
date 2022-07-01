@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  resources :inline_items
   get 'search', to: 'search#index'
   get 'categories/index'
   resources :items

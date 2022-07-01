@@ -5,7 +5,3 @@ function myFunction() {
 
 
 
-$("#mynewitemclose").click(function(){
-  // debugger
-  $("#item-updated-errors").remove()
-})
