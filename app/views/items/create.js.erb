@@ -16,7 +16,8 @@
     $(".item_description").val('');
     $(".item_price").val('');
     $("#container_items").prepend('<%= j render @item %>');
-    $("#item_<%= @item.id %>").hide();
+    $("#item_<%=item.id%>");
+    <%= @item.id%><%= is the item id%>
 <%end%>
 
 

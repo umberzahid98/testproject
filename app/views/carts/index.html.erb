@@ -1,0 +1,28 @@
+<div class="row">
+
+
+<%if @user_inline_items%>
+  <div id="cart_total"><h1>Total: Rs. <%=@user_inline_items.sum('price*quantity')%></h1> </div>
+<%else%>
+  <div><h1>Total: 0</h1> </div>
+<%end%>
+  <div class="md-col-6">
+  <button type="button" class="md-col-4 btn btn-info">check out</button>
+  </div>
+
+</div>
+  <div class="jumbotron md-col-8" >
+    <h5 class="display-4 ">My Cart</h5>
+    <hr>
+    <div class="row" id="container_items">
+      <%if @user_inline_items%>
+
+        <%= render :partial => "inline_item", :collection => @user_inline_items%>
+
+      <%end%>
+    </div>
+  </div>
+
+
+
+

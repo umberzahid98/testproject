@@ -4,6 +4,7 @@
 
       <h3  class="panel-title "><%=link_to item.title, item, class:"item_partial"%></h3>
       <p><%=item.description%></p>
+
     </div>
 
     <div class="panel-body">
@@ -31,7 +32,7 @@
             <input hidden name="inline_item[quantity]" value="1"/>
             <input hidden name="inline_item[price]" value="<%=item.price%>"/>
         </div>
-        <input hidden name="_method" value="GET">
+        <input hidden name="_method" value="POST">
         <button type="submit" class="btn btn-primary">Add to cart</button>
     <% end %>
   <!-- Modal -->
