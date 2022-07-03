@@ -1,0 +1,23 @@
+<div class="col-md-12  blog-main box text-center" >
+
+                    <div class="row cart">
+                        <div class="row main align-items-center " style="background-color:white">
+
+                            <div class="col-2"><img class="img-fluid" src="https://i.imgur.com/ba3tvGm.jpg"></div>
+                            <div class="col">
+                            <h1>order</h1>
+                              <div class="row"><%=order.id%></div>
+                            </div>
+                            <div class="row">
+                                <div id="quantity-div_<%=order.id%>" class="mt-2"><div><%=order.user_id%></div></div>
+                                <%# <div class="col">&euro; <%=inline_item.price*inline_item.quantity%></div>
+                        <span style="width:90px"></span>
+                        <%order.inline_item_ids.each do |item|%>
+                         <%= render partial: "order_inline_items", locals: { item: item}%>
+                        <%end%>
+
+
+                        </div>
+                    </div>
+                    <br>
+</div>

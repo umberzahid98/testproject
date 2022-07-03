@@ -4,7 +4,12 @@
 class OrdersController < ApplicationController
   before_action :set_order, only: %i[show edit update destroy]
 
-  def index; end
+  def index
+    @orders = Order.user_orders(current_user.id)
+
+
+
+  end
 
   def show; end
 
@@ -16,7 +21,7 @@ class OrdersController < ApplicationController
 
 
 
-    @order = Order.create(order_params.merge!(inline_item_ids: user_inline_item_id))
+    @order = current_user.orders.create(inline_item_ids: user_inline_item_id)
     @user_cart= current_user.inline_items.where(status: "non-checkedout").update_all(status: "checkedout")
 
     respond_to do |format|
@@ -43,7 +48,7 @@ class OrdersController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def order_params
-    params.require(:order).permit(:status, :user_id)
+    params.require(:order).permit(:user_id, :status )
   end
 
   def user_inline_item_id
