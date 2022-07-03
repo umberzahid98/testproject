@@ -6,14 +6,13 @@ class OrdersController < ApplicationController
 
   def index
     @orders = Order.user_orders(current_user.id)
-
-
-
+    @total_price
   end
 
   def show; end
 
   def new
+
     @order = Order.new
   end
 
@@ -22,7 +21,7 @@ class OrdersController < ApplicationController
 
 
     @order = current_user.orders.create(inline_item_ids: user_inline_item_id)
-    @user_cart= current_user.inline_items.where(status: "non-checkedout").update_all(status: "checkedout")
+    @user_cart = current_user.inline_items.where(status: "non-checkedout").update_all(status: "checkedout")
 
     respond_to do |format|
 
@@ -44,11 +43,32 @@ class OrdersController < ApplicationController
   # Use callbacks to share common setup or constraints between actions.
   def set_order
     @order = Order.find(params[:id])
+
   end
 
   # Only allow a list of trusted parameters through.
   def order_params
-    params.require(:order).permit(:user_id, :status )
+    params.require(:order).permit(:user_id, :status, :price )
+  end
+
+  def calculate_bill
+    cart_items_ids=user_inline_item.pluck(:item_id)
+    # cart_items_ids.
+
+  end
+
+  def user_inline_item
+    if current_user
+       user_inline_items = InlineItem.where(user_id: current_user.id).where(status: "non-checkedout")
+
+    else
+      cart = Cart.find_by(id: session[:cart_id])
+        if cart
+          user_inline_items = InlineItem.where(cart: session[:cart_id]).where(status: "non-checkedout")
+        end
+    end
+    #  cart items
+    user_inline_items
   end
 
   def user_inline_item_id
