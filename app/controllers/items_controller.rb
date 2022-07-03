@@ -8,7 +8,6 @@ class ItemsController < ApplicationController
   def index
     @items = Item.all
     @item = Item.new
-
     @inline_item = InlineItem.new
     if current_user
       @cart = Cart.find_by(id: session[:cart_id])
