@@ -1,16 +1,25 @@
-<h1>Orders History</h1>
-<div class="card text-white bg-info mb-3" style="max-width: 40rem; max-height: 40rem;">
+<div id="orders_history"><h1>Orders History</h1></div>
+<div class="card text-white bg-info mb-3 " style="max-width: 35rem; max-height: 40rem;">
   <div class="card-header">Summary</div>
   <div class="card-body">
-<div class="col">
+
   <div class="row">
     <div class="ml-2 ordered_status"> <%="Ordered:  "%><hr><%=@orders.where(status: "ordered").count%></div>
     <div class="ml-2 paid_status" > <%="Paid:  "%><hr><%=@orders.where(status: "paid").count%></div>
     <div class="ml-2 cancelled_status" > <%="Cancelled:  "%><hr><%=@orders.where(status: "cancelled").count%></div>
     <div class="ml-2 completed_status" > <%="Completed:  "%><hr><%=@orders.where(status: "completed").count%></div>
   </div>
-  </div>
 </div>
 </div>
+
+
+  <%= form_tag search_for_members_order_path(Order.first), :method => 'get', :remote => true do%>
+    <div>
+        <%= text_field_tag :search, params[:search], :class => 'form-control', :placeholder => 'User name'%>
+    </div>
+      <%= submit_tag "Add user", :name => nil, :class => "btn btn-info"%>
+<% end %>
+            <div id="members">
+        <%=  @orders.count %></div>
 <%=render @orders%>
 

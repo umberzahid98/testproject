@@ -12,7 +12,9 @@ Rails.application.routes.draw do
   get 'categories/index'
   resources :items
   resources :categories
-
+  resources :orders do
+    get :search_for_members, :on => :member
+  end
   get 'items/index'
   get 'homes/about'
   root to: 'items#index'

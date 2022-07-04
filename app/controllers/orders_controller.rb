@@ -5,15 +5,25 @@
 class OrdersController < ApplicationController
   before_action :set_order, only: %i[show edit update destroy]
 
+
   def index
+
       if current_user.admin?
         @orders = Order.all
       else
         @orders = Order.user_orders(current_user.id)
       end
+  end
 
-
-
+  def search_for_members
+    if (params[:search])
+      @orders = Order.first
+    else
+        @orders = Order.first
+    end
+   respond_to do |format|
+    format.js
+   end
   end
 
   def show; end
