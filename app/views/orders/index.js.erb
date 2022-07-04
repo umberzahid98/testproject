@@ -1,1 +1,4 @@
-alert("index.js.erb")
+$("#members").empty().append(`<%=@orders.pluck(:price)%>`)
+$("#orders_container").empty().append(` <%if @orders%>
+        <%= j render :partial => "order", :collection => @orders%>
+      <%end%>`)

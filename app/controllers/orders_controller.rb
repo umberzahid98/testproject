@@ -4,8 +4,6 @@
 
 class OrdersController < ApplicationController
   before_action :set_order, only: %i[show edit update destroy]
-
-
   def index
 
       if current_user.admin?
@@ -13,17 +11,13 @@ class OrdersController < ApplicationController
       else
         @orders = Order.user_orders(current_user.id)
       end
-  end
+      if params[:search]
+        @orders = Order.order_with_given_status(params[:search])
+        puts "in index params"
+        puts @orders.pluck(:status)
 
-  def search_for_members
-    if (params[:search])
-      @orders = Order.first
-    else
-        @orders = Order.first
-    end
-   respond_to do |format|
-    format.js
-   end
+      end
+
   end
 
   def show; end
@@ -32,8 +26,8 @@ class OrdersController < ApplicationController
 
     @order = Order.new
   end
-
-  def create # rubocop:disable Metrics/MethodLength
+  # rubocop:disable Metrics/MethodLength
+  def create
 
     @order = current_user.orders.create(inline_item_ids: user_inline_item_id, price: calculate_bill )
     @user_cart = current_user.inline_items.where(status: "non-checkedout").update_all(status: "checkedout")
@@ -57,13 +51,16 @@ class OrdersController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_order
+
+
     @order = Order.find(params[:id])
 
   end
 
   # Only allow a list of trusted parameters through.
   def order_params
-    params.require(:order).permit(:user_id, :status, :price )
+    params.require(:order).permit(:user_id, :status, :price, :search )
+
   end
 
   def calculate_bill
@@ -98,4 +95,5 @@ class OrdersController < ApplicationController
     #  ids of cart items
     user_inline_items.pluck(:id)
   end
+
 end

@@ -13,7 +13,7 @@ Rails.application.routes.draw do
   resources :items
   resources :categories
   resources :orders do
-    get :search_for_members, :on => :member
+    get :search_for_members, on: :collection
   end
   get 'items/index'
   get 'homes/about'

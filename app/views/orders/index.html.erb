@@ -12,14 +12,12 @@
 </div>
 </div>
 
+<%= button_to 'Ordered',orders_path, action: :test,method: :"get", form_class: 'btn btn-danger',params:{search: "ordered"}, :remote=>true %>
+<%= button_to 'Paid',orders_path, action: :test,method: :"get", form_class: 'btn btn-danger',params:{search: "paid"}, :remote=>true %>
+<%= button_to 'Cancelled',orders_path, action: :test,method: :"get", form_class: 'btn btn-danger',params:{search: "cancelled"}, :remote=>true %>
+<%= button_to 'Completed',orders_path, action: :test,method: :"get", form_class: 'btn btn-danger',params:{search: "completed"}, :remote=>true %>
 
-  <%= form_tag search_for_members_order_path(Order.first), :method => 'get', :remote => true do%>
-    <div>
-        <%= text_field_tag :search, params[:search], :class => 'form-control', :placeholder => 'User name'%>
-    </div>
-      <%= submit_tag "Add user", :name => nil, :class => "btn btn-info"%>
-<% end %>
-            <div id="members">
-        <%=  @orders.count %></div>
+<div id="orders_container">
 <%=render @orders%>
+</div>
 
