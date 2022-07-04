@@ -2,14 +2,16 @@
 
     <h5 class="display-4 ">Order </h5>
     <div class="row">
+
       <h6 class="ml-3"><%="Name: "+User.find(@order.user_id).full_name%></h6>
       <h6 class="ml-5"><%="Email: "+User.find(@order.user_id).email%></h6>
+
     </div>
 
 
       <div class="row ml-1">
-      <h5 class="mt-1 display-7 ">Bill:  <%=@order.price%></h5>
-      <div class="ml-2 mt-0 status" > <%=@order.status%></div>
+      <h5 class="mt-1 display-7 ">Bill Rs:  <%=@order.price%></h5>
+      <div class="ml-2 mt-0 ordered_status" > <%=@order.status%></div>
       <%a = @order.created_at.to_s%>
       <%a = a.split(" ")%>
       <div class="mt-1 ml-5">

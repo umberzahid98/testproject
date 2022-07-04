@@ -6,6 +6,8 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   has_many :orders
   has_many :inline_items
+  validates :display_name, length: { minimum: 2, maximum: 32, allow_blank: true }
+  validates :full_name , presence: true
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   enum role: %i[user admin]
