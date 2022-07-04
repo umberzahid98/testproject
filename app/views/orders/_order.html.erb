@@ -1,8 +1,23 @@
+
   <div class="jumbotron md-col-8" >
     <h5 class="display-4 ">Order </h5>
     <div class="row ml-1">
-    <h5 class="mt-1 display-7 ">Bill:  <%=order.price%></h5>
-    <div class="ml-2 status" > <%=order.status%></div>
+      <h5 class="mt-1 display-7 ">Bill:  <%=order.price%></h5>
+      <div class="ml-2 mt-0 status" > <%=order.status%></div>
+      <%a = order.created_at.to_s%>
+      <%a = a.split(" ")%>
+      <div class="mt-1 ml-5">
+        <div class="row">
+        <h6><%="Date: " + a[0]%></h6>
+
+        <h6 class="ml-5"><%="Time: " + a[1]%></h6>
+
+        </div>
+      </div>
+
+    <%# this date is wokring on console and not in the app  %>
+    <%# <%=Date.new(order.created_at.to_s[0,11].split("-").map(&:to_i).join(", ").to_i)%>
+
 
 
     </div>
