@@ -5,8 +5,14 @@ class OrdersController < ApplicationController
   before_action :set_order, only: %i[show edit update destroy]
 
   def index
-    @orders = Order.user_orders(current_user.id)
-    @total_price
+      if current_user.admin?
+        @orders = Order.all
+      else
+        @orders = Order.user_orders(current_user.id)
+      end
+
+
+
   end
 
   def show; end
@@ -18,9 +24,7 @@ class OrdersController < ApplicationController
 
   def create # rubocop:disable Metrics/MethodLength
 
-
-
-    @order = current_user.orders.create(inline_item_ids: user_inline_item_id)
+    @order = current_user.orders.create(inline_item_ids: user_inline_item_id, price: calculate_bill )
     @user_cart = current_user.inline_items.where(status: "non-checkedout").update_all(status: "checkedout")
 
     respond_to do |format|
@@ -52,10 +56,9 @@ class OrdersController < ApplicationController
   end
 
   def calculate_bill
-    cart_items_ids=user_inline_item.pluck(:item_id)
-    # cart_items_ids.
-
+    user_inline_item.sum('price*quantity')
   end
+
 
   def user_inline_item
     if current_user

@@ -12,7 +12,12 @@ class ItemsController < ApplicationController
     if current_user
       @cart = Cart.find_by(id: session[:cart_id])
       InlineItem.where(cart: session[:cart_id]).update_all(user_id: current_user.id) if @cart
+    else
+      @cart = Cart.create
+      session[:cart_id] = @cart.id
+
     end
+
   end
 
   # GET /items/1 or /items/1.json

@@ -10,13 +10,7 @@
                             <div class="row">
 
                                 <%= form_with( model:inline_item , remote: true) do |t| %>
-                                  <%=item.price%>
-                                  <%=inline_item.quantity%>
-                                  <%=item.price*inline_item.quantity%>
-
-
                                     <%= t.hidden_field :quantity, :value=> (inline_item.quantity)-1 %>
-                                    <%= t.hidden_field :price, :value=> (item.price*inline_item.quantity) %>
                                     <%= t.submit "-", class:"btn btn-danger mr-2" %>
                                   <% end %>
 
@@ -24,16 +18,13 @@
 
                                 <%= form_with( model:inline_item , remote: true) do |t| %>
                                   <%= t.hidden_field :quantity, :value=> inline_item.quantity+1 %>
-
-                                  <%= t.hidden_field :price, :value=> (item.price*inline_item.quantity) %>
                                   <%= t.submit "+" , class:"btn btn-primary ml-2"%>
 
                                 <% end %>
 
-                                <div class="col">Rs. <%=inline_item.price%></div>
+                                <div class="col mt-1">Rs.  <%=item.price*inline_item.quantity%></div>
                         <span style="width:90px"></span>
 
-                        <%# <span  class="close">&#10005;<%= link_to 'Remove', inline_item, method: :delete %> </span></div>
                                 <%= form_with( model:inline_item , remote: true) do |t| %>
                                   <input type="hidden" name="_method" value="DELETE">
                                   <%= t.submit "Remove" , class:"btn btn-primary ml-2"%>
@@ -42,17 +33,3 @@
                     </div>
                     <br>
 </div>
-
-
-
-<%#
-<script>
-$(".decrement-quantity").click(function(){
-  alert("I am an sdsd box!")
-
- // debugger
- inline_item.quantity= inline_item.quantity-1
-  $("#quantity-div").html(inline_item.quantity)
-
-})
-</script> %>

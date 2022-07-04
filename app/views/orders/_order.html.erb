@@ -1,17 +1,14 @@
-
-
   <div class="jumbotron md-col-8" >
     <h5 class="display-4 ">Order </h5>
-    <%=@total_price%>
+    <div class="row ml-1">
+    <h5 class="mt-1 display-7 ">Bill:  <%=order.price%></h5>
+    <div class="ml-2 status" > <%=order.status%></div>
 
+
+    </div>
     <hr>
-    <%=@total_price=45%>
     <div class="row" >
-
       <%order.inline_item_ids.each do |item|%>
-      <%=item%>
-       <%# get item id from each inline items %>
-       <%# item.pluck(:) %>
         <%= render partial: "order_inline_items", locals: { item: item}%>
       <%end%>
     </div>
