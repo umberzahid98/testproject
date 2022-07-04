@@ -3,8 +3,8 @@
 <h1>Orders#show</h1>
 <p>Find me in app/views/orders/show.html.erb</p>
 <%=@order.inspect%>
-
-
-
+      <%@order.inline_item_ids.each do |item|%>
+        <%= render partial: "order_inline_items", locals: { item: item}%>
+      <%end%>
 <%=@order.inline_item_ids.inspect%>
 <%= @order.inline_item_ids.count%>
