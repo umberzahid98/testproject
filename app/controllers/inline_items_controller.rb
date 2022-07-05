@@ -37,9 +37,14 @@ class InlineItemsController < ApplicationController
   def create
     # byebug
     if current_user
+
       @inline_item = InlineItem.create(inline_item_params.merge!(cart: @cart.id, user_id: current_user.id))
+
     else
+
       @inline_item = InlineItem.create(inline_item_params.merge!(cart: @cart.id))
+      @inline_item.save(validate: false)
+
     end
 
   end
