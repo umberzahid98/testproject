@@ -1,7 +1,2 @@
-$("#myupdateitem_<%= @item.id %>").modal('hide');
-$("#item_<%= @item.id %>").fadeOut(500, function(){
-  $(this).remove();
-  $("#container_items").prepend('<%= j render @item %>')
-});
-
-$(#container_items).empty().append(`<%= j render @items%>`)
+$("#exampleModalCenter").modal('hide');
+$("#container_items").empty().append(`<%= j render @items%>`)
