@@ -1,14 +1,16 @@
+# frozen_string_literal: true
+
 class ItemsController < ApplicationController
-  before_action :set_item, only: %i[ show edit update destroy ]
+  before_action :set_item, only: %i[show edit update destroy]
 
   # GET /items or /items.json
   def index
     @items = Item.all
+    @item = Item.new
   end
 
   # GET /items/1 or /items/1.json
-  def show
-  end
+  def show; end
 
   # GET /items/new
   def new
@@ -16,21 +18,20 @@ class ItemsController < ApplicationController
   end
 
   # GET /items/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /items or /items.json
   def create
-    @item = Item.new(item_params)
-
+    @item = Item.create(item_params)
     respond_to do |format|
       if @item.save
-        format.html { redirect_to item_url(@item), notice: "Item was successfully created." }
+        format.html { redirect_to item_url(@item), notice: 'Item was successfully created.' }
         format.json { render :show, status: :created, location: @item }
       else
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @item.errors, status: :unprocessable_entity }
       end
+      format.js
     end
   end
 
@@ -38,12 +39,13 @@ class ItemsController < ApplicationController
   def update
     respond_to do |format|
       if @item.update(item_params)
-        format.html { redirect_to item_url(@item), notice: "Item was successfully updated." }
+        format.html { redirect_to item_url(@item), notice: 'Item was successfully updated.' }
         format.json { render :show, status: :ok, location: @item }
       else
         format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @item.errors, status: :unprocessable_entity }
       end
+      format.js
     end
   end
 
@@ -52,19 +54,21 @@ class ItemsController < ApplicationController
     @item.destroy
 
     respond_to do |format|
-      format.html { redirect_to items_url, notice: "Item was successfully destroyed." }
+      format.html { redirect_to items_url, notice: 'Item was successfully destroyed.' }
       format.json { head :no_content }
+      format.js
     end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_item
-      @item = Item.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def item_params
-      params.require(:item).permit(:title, :description, :price)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_item
+    @item = Item.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def item_params
+    params.require(:item).permit(:title, :description, :price, :image)
+  end
 end
