@@ -2,12 +2,14 @@
 
 # class of items that the admin will create
 class Item < ApplicationRecord
+  scope :permited_items, -> { where(status: "permit") }
   has_many :category_items
   has_many :categories, through: :category_items, dependent: :destroy
   # after_save :hide_modal
   # validates_associated :categories
 
   has_one_attached :image
+  validates :status, presence: true
   validates :title, presence: true, uniqueness: true
   validates :description, presence: true
   validates :price, numericality: { only_float: true, greater_than: 0 }

@@ -6,7 +6,18 @@ class ItemsController < ApplicationController
 
   # GET /items or /items.json
   def index
-    @items = Item.all
+    if current_user
+      if current_user.admin?
+        @items = Item.all
+      else
+        @items=Item.permited_items
+      end
+    end
+
+    unless current_user
+        @items = Item.permited_items
+    end
+
     @item = Item.new
     @inline_item = InlineItem.new
     if current_user
