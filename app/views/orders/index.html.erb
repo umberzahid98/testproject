@@ -1,4 +1,6 @@
 <div id="orders_history"><h1>Orders History</h1></div>
+<div class="row " style="display: flex;
+justify-content: space-around;">
 <div class="card text-white bg-info mb-3 " style="max-width: 35rem; max-height: 40rem;">
   <div class="card-header">Summary</div>
   <div class="card-body">
@@ -11,11 +13,24 @@
   </div>
 </div>
 </div>
+<div class="card text-white bg-warning mb-3 ml-5" style="max-width: 35rem; max-height: 40rem;">
+  <div class="card-header">Filter Result by Status</div>
+  <div class="card-body">
 
-<%= button_to 'Ordered',orders_path, action: :test,method: :"get", form_class: 'btn btn-danger',params:{search: "ordered"}, :remote=>true %>
-<%= button_to 'Paid',orders_path, action: :test,method: :"get", form_class: 'btn btn-danger',params:{search: "paid"}, :remote=>true %>
-<%= button_to 'Cancelled',orders_path, action: :test,method: :"get", form_class: 'btn btn-danger',params:{search: "cancelled"}, :remote=>true %>
-<%= button_to 'Completed',orders_path, action: :test,method: :"get", form_class: 'btn btn-danger',params:{search: "completed"}, :remote=>true %>
+
+<div class="row">
+<%= button_to 'Ordered',orders_path, action: :test,method: :"get", form_class: 'btn btn-info ml-1',params:{search: "ordered"}, :remote=>true %>
+<%= button_to 'Paid',orders_path, action: :test,method: :"get", form_class: 'btn btn-info ml-1',params:{search: "paid"}, :remote=>true %>
+<%= button_to 'Cancelled',orders_path, action: :test,method: :"get", form_class: 'btn btn-info ml-1',params:{search: "cancelled"}, :remote=>true %>
+<%= button_to 'Completed',orders_path, action: :test,method: :"get", form_class: 'btn btn-info ml-1',params:{search: "completed"}, :remote=>true %>
+</div>
+  </div>
+</div>
+</div>
+
+    <div id="selected_status" style="display:none" class="ml-2 selected_status_div" > </div><br>
+
+
 
 <div id="orders_container">
 <%=render @orders%>

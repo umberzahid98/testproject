@@ -13,7 +13,12 @@ class Item < ApplicationRecord
   validates :price, numericality: { only_float: true, greater_than: 0 }
   validate :save_object?
 
-
+  enum status: %i[permit not_permit]
+  # setting the default status at hte time of creation
+  after_initialize :set_default_status, if: :new_record?
+  def set_default_status
+    self.status ||= :permit
+  end
 
   # validate :no_category
   # validate :image_type

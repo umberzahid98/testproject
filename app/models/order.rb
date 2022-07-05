@@ -3,7 +3,6 @@
 # order class
 class Order < ApplicationRecord
   scope :user_orders, -> (user_id) { where(user_id: user_id) }
-  scope :order_with_given_status, -> (status) { where(status: status) }
   belongs_to :user
   validates :status, presence: true
   enum status: %i[ordered paid completed cancelled]

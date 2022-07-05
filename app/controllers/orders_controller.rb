@@ -1,23 +1,21 @@
 # frozen_string_literal: true
 
 # orders controller
-
 class OrdersController < ApplicationController
   before_action :set_order, only: %i[show edit update destroy]
+
   def index
+    if current_user.admin?
+      @orders = Order.all
+    else
+      @orders = Order.user_orders(current_user.id)
+    end
 
-      if current_user.admin?
-        @orders = Order.all
-      else
-        @orders = Order.user_orders(current_user.id)
-      end
-      if params[:search]
-        @orders = Order.order_with_given_status(params[:search])
-        puts "in index params"
-        puts @orders.pluck(:status)
+    if params[:search]
+      @orders = Order.where(status: params[:search])
 
-      end
-
+      @status_searched = params[:search]
+    end
   end
 
   def show; end
