@@ -20,6 +20,8 @@
         <%if current_user%>
           <%if current_user.admin?%>
             <li class="nav-item">
+            <%# changes index path of admin route %>
+            <%# <%= link_to "All Orders", admin_orders_index_path, class:"nav-link"%>
             <%= link_to "All Orders", admin_orders_index_path, class:"nav-link"%>
             </li>
           <%end%>

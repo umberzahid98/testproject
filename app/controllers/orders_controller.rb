@@ -20,6 +20,21 @@ class OrdersController < ApplicationController
 
   def show; end
 
+  def update
+    @orders = Order.all
+    respond_to do |format|
+      if @order.update(order_params)
+        format.html { redirect_to item_url(@order), notice: 'Order was successfully updated.' }
+        format.json { render :show, status: :ok, location: @order }
+
+      else
+        format.html { render :edit, status: :unprocessable_entity }
+        format.json { render json: @order.errors, status: :unprocessable_entity }
+      end
+      format.js
+    end
+  end
+
   def new
     @order = Order.new
   end
