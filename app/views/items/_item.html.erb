@@ -10,6 +10,17 @@
     <div class="panel-body">
       <div style="color: #3BB2D6;"><%= time_ago_in_words(item.created_at)%>
       </div>
+
+      <div>
+        <%= form_with( model:item , remote: true) do |t| %>
+            <%if item.permit?%>
+              <%= t.text_field :status, :value=> "not_permit" %>
+            <%else%>
+              <%= t.text_field :status, :value=> "permit" %>
+            <%end%>
+            <%= t.submit "change to permit", class:"btn btn-danger mr-2" %>
+        <% end %>
+      </div>
       <br>
       <div class="btn-group" role="group" aria-label="...">
         <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#myupdateitem_<%= item.id%>">
