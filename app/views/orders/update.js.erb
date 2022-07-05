@@ -1,3 +1,3 @@
 
-$("#orders_index_container").empty().append(`<%= j render @orders%>`)
-
+$("#orders_index_container").empty().append(`<%= j render "summary",orders: @orders%>`)
+$("#orders_index_container").append(`<%= j render @orders%>`)
