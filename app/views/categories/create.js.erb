@@ -11,11 +11,13 @@
 
 <%else%>
     <%# $("#newcategorymodal").modal(hide); %>
-    $("#newcategorymodal").hide();
-    $("#category-updated-errors").remove();
-    $(".category_name").val('');
-    $("#container_categories").prepend('<%= j render @category %>');
-    $("#category_<%= @category.id %>").hide();
+    $('body').removeClass('modal-open')
+    $('.modal-backdrop').remove()
+    $("#newcategorymodal").modal('hide')
+    $("#category-updated-errors").remove()
+    $(".category_name").val('')
+    $("#container_categories").empty().append('<%= j render @categories %>')
+
 <%end%>
 
 

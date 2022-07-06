@@ -34,7 +34,7 @@
           <div class="modal-header">
            <h4 class="modal-title" id="myModalLabel">Item</h4>
           </div>
-            <div class="item_errors_div" id="item-updated-errors">
+            <div class="item_errors_div" id="item-new-errors">
 
               <div>
                 <% if @item.errors.full_messages.any? %>
@@ -82,7 +82,9 @@
 <script>
 $("#mynewitemclose").click(function(){
  // debugger
-  $("#item-updated-errors").remove()
+  $("#item-new-errors").remove()
 })
+
+
 </script>
 

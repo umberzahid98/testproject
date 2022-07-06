@@ -1,5 +1,4 @@
 
-
   $("#mynewitemclose").click(function(){
-    $("#item-updated-errors").remove()
+    $("#item-new-errors").remove()
   })

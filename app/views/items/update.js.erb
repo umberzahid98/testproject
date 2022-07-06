@@ -1,2 +1,4 @@
-$("#exampleModalCenter").modal('hide');
+<%# $("exampleModalCenter").modal('hide'); %>
 $("#container_items").empty().append(`<%= j render @items%>`)
+$('body').removeClass('modal-open');
+$('.modal-backdrop').remove();

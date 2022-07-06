@@ -1,11 +1,19 @@
-<div class="col-md-4  blog-main box text-center" id="category_<%= category.id %>">
-  <div class="panel panel-info">
+<%# <div class="col-md-4  blog-main box text-center" id="category_<%= category.id %>
+  <%# <div class="panel panel-info">
     <div class="panel-heading">
-      <h3 class="panel-name"><%=category.name%></h3>
-    </div>
+      <h3 class="panel-name"><%=category.name%>
+
+    <%# </div>
 
 
-  </div>
+  </div> %>
 
 
-</div>
+<%# </div> %>
+
+
+              <tr>
+                <td> <%=@count += 1%> </td>
+                <td> <%=category.name%> </td>
+
+              </tr>

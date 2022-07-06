@@ -5,8 +5,26 @@
 <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#newcategorymodal">
   Add Category
 </button>
-  <div class="row" id="container_categories">
-    <%= render @category%>
+  <div class="row" >
+    <div class="col-md-4  blog-main box text-center" >
+  <div class="panel panel-info" >
+    <div class="panel-heading">
+      <h3 class="panel-name"></h3>
+            <table class="table table-hover" id="container_categories">
+              <tr>
+                <th>No.</th>
+                <th>Category</th>
+<div >
+              <%= render @categories %>
+</div>
+            </table>
+    </div>
+
+
+  </div>
+
+
+</div>
   </div>
 <%= form_for(@category, remote: true) do |f|%>
 <!-- Modal -->
@@ -44,16 +62,4 @@
 
 <br>
 <br>
-<table class="table table-hover">
-  <tr>
-    <th>No.</th>
-    <th>Category</th>
-  </tr>
-  <% @categories.each do |category|%>
-  <tr>
-    <td> <%=@count += 1%> </td>
-    <td> <%=category.name%> </td>
-  </tr>
-  <%end%>
 
-</table>

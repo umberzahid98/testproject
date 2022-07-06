@@ -20,7 +20,9 @@ class CategoriesController < ApplicationController
   def edit; end
 
   def create # rubocop:disable Metrics/MethodLength
+    @categories = Category.all
     @category = Category.create(category_params)
+    @count = 0
 
     respond_to do |format|
       if @category.save

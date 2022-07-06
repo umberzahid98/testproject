@@ -1,6 +1,7 @@
+$("#container_items").empty().append(`<%= j render @items%>`)
 
 <%if @item.errors.full_messages.any?%>
-  $("#item-updated-errors").empty().append(
+  $("#item-new-errors").empty().append(
   `
     <% if @item.errors.full_messages.any? %>
       <% @item.errors.full_messages.each do |error_message| %>
@@ -11,7 +12,7 @@
 
 <%else%>
     $("#mynewitem").modal.('hide');
-    $("#item-updated-errors").remove();
+    $("#item-new-errors").remove();
     $(".item_title").val('');
     $(".item_description").val('');
     $(".item_price").val('');
