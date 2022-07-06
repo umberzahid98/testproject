@@ -42,22 +42,26 @@ class OrdersController < ApplicationController
   # rubocop:disable Metrics/MethodLength
   def create
 
+    if(!user_inline_item_id.empty?)
     @order = current_user.orders.create(inline_item_ids: user_inline_item_id, price: calculate_bill )
+
     @user_cart = current_user.inline_items.where(status: "non-checkedout").update_all(status: "checkedout")
 
     respond_to do |format|
 
       if @order.save
-
-        format.html { redirect_to order_url(@order), notice: 'order was successfully created.' }
-
-        format.json { render :show, status: :created, location: @order }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @order.errors, status: :unprocessable_entity }
+        redirect_to order_url(@order), notice: 'order was successfully created.'
       end
       format.js
+      end
+    else
+      @empty_cart = true
+      respond_to do |format|
+        format.js
+        end
     end
+
+
   end
 
   private
