@@ -1,4 +1,18 @@
+
+
+<%if @item.errors.full_messages.any?%>
+  $("#item-updated-errors").empty().append(
+  `
+    <% if @item.errors.full_messages.any? %>
+      <% @item.errors.full_messages.each do |error_message| %>
+        <%= error_message  %> <br />
+      <% end %>
+    <% end %>
+  `)
+
+<%else%>
 <%# $("exampleModalCenter").modal('hide'); %>
 $("#container_items").empty().append(`<%= j render @items%>`)
-$('body').removeClass('modal-open');
-$('.modal-backdrop').remove();
+$('body').removeClass('modal-open')
+$('.modal-backdrop').remove()
+<%end%>
