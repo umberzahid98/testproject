@@ -6,7 +6,7 @@ class OrdersController < ApplicationController
 
   def index
     if current_user.admin?
-      @orders = Order.all
+      @orders = Order.all.order(:created_at)
     else
       @orders = Order.user_orders(current_user.id)
     end
@@ -21,7 +21,8 @@ class OrdersController < ApplicationController
   def show; end
 
   def update
-    @orders = Order.all
+    # created_at: :desc
+    @orders = Order.all.order(:created_at)
     respond_to do |format|
       if @order.update(order_params)
         format.html { redirect_to item_url(@order), notice: 'Order was successfully updated.' }
