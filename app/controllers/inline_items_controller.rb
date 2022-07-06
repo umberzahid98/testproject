@@ -8,6 +8,7 @@ class InlineItemsController < ApplicationController
   end
   def update
 
+
     user = !current_user.nil?
 
     respond_to do |format|
@@ -41,7 +42,6 @@ class InlineItemsController < ApplicationController
   end
   def destroy
     @inline_item.destroy
-
     @user_inline_items = user_inline_item
 
     respond_to do |format|
@@ -63,16 +63,25 @@ class InlineItemsController < ApplicationController
   private
   # Use callbacks to share common setup or constraints between actions.
   def set_inline_item
-    if(current_user)
+
+puts "this is  curretn user"
+puts current_user
+    if current_user
       @inline_item = InlineItem.find(params[:id])
+
     else
-      @inline_item = InlineItem.find(inline_item_params[:id])
+      puts "in else of not current user"
+      # @inline_item = InlineItem.find(inline_item_params[:id])
+
+      @inline_item = InlineItem.find(params[:id])
+
     end
 
 
   end
 
   def set_cart
+
     @cart = Cart.find_by(id: session[:cart_id])
     if @cart
     else
