@@ -1,4 +1,4 @@
-<div class="col-md-4  blog-main box text-center" id="item_<%= item.id %>">
+<div class="col-md-4  blog-main box text-center "  id="item_<%= item.id %>">
   <div  class="panel panel-info">
     <div class="panel-heading">
 
@@ -9,6 +9,23 @@
 
     <div class="panel-body">
       <div style="color: #3BB2D6;"><%= time_ago_in_words(item.created_at)%>
+      </div>
+
+      <div>
+      <%if item.permit?%>
+        <%a="Retire Item"%>
+      <%else%>
+        <%a="mark as available"%>
+      <%end%>
+
+        <%= form_with( model:item , remote: true) do |t| %>
+            <%if item.permit?%>
+              <%= t.hidden_field :status, :value=> "not_permit" %>
+            <%else%>
+              <%= t.hidden_field :status, :value=> "permit" %>
+            <%end%>
+            <%= t.submit a, class:"btn btn-danger mr-2" %>
+        <% end %>
       </div>
       <br>
       <div class="btn-group" role="group" aria-label="...">
@@ -24,7 +41,7 @@
       </div>
     </div>
   </div>
-
+  <%if item.permit?%>
     <%= form_with(model: @inline_item, remote: false) do |f| %>
         <div class="field">
             <%# <%= f.label :title%>
@@ -35,9 +52,14 @@
         <input hidden name="_method" value="POST">
         <button type="submit" class="btn btn-primary">Add to cart</button>
     <% end %>
+  <%else%>
+    <div style="width:120px;  margin-left: 8vw!important;" class="btn-danger mt-4">"Retired"</div>
+  <%end%>
+
   <!-- Modal -->
   <%= form_for(item, :method => :put, remote: true) do |f|%>
     <div class="modal fade" id="myupdateitem_<%=item.id%>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+
       <div class="modal-dialog" >
         <div class="modal-content">
           <div class="modal-header">
@@ -69,3 +91,4 @@
     </div>
   <%end%>
 </div>
+

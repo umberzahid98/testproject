@@ -27,7 +27,7 @@
   <div class="jumbotron md-col-8" >
     <h5 class="display-4 ">My Cart</h5>
     <hr>
-    <div class="row"  id="container_items">
+    <div class="row"  id="container_inline_items">
       <%if @user_inline_items%>
 
         <%= render :partial => "inline_item", :collection => @user_inline_items.where(status: "non-checkedout")%>

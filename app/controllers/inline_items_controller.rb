@@ -7,6 +7,7 @@ class InlineItemsController < ApplicationController
     @inline_items = InlineItem.all
   end
   def update
+
     respond_to do |format|
       if @inline_item.update(inline_item_params)
         @user_inline_items=user_inline_item

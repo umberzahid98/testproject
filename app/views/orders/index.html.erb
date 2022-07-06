@@ -1,3 +1,15 @@
-<h1>Orders History</h1>
-<%=render @orders%>
 
+<div id="orders_page">
+<div id="orders_history"><h1>Orders History</h1></div>
+<div id="orders_index_container">
+
+  <div id="orders_container">
+  <%=render "summary",orders: @orders%>
+  </div>
+
+  <div id="orders_container">
+  <%=render @orders%>
+  </div>
+
+</div>
+</div>

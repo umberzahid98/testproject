@@ -5,24 +5,41 @@ class OrdersController < ApplicationController
   before_action :set_order, only: %i[show edit update destroy]
 
   def index
-      if current_user.admin?
-        @orders = Order.all
-      else
-        @orders = Order.user_orders(current_user.id)
-      end
+    if current_user.admin?
+      @orders = Order.all
+    else
+      @orders = Order.user_orders(current_user.id)
+    end
 
+    if params[:search]
+      @orders = Order.where(status: params[:search])
 
-
+      @status_searched = params[:search]
+    end
   end
 
   def show; end
 
-  def new
+  def update
+    @orders = Order.all
+    respond_to do |format|
+      if @order.update(order_params)
+        format.html { redirect_to item_url(@order), notice: 'Order was successfully updated.' }
+        format.json { render :show, status: :ok, location: @order }
 
-    @order = Order.new
+      else
+        format.html { render :edit, status: :unprocessable_entity }
+        format.json { render json: @order.errors, status: :unprocessable_entity }
+      end
+      format.js
+    end
   end
 
-  def create # rubocop:disable Metrics/MethodLength
+  def new
+    @order = Order.new
+  end
+  # rubocop:disable Metrics/MethodLength
+  def create
 
     @order = current_user.orders.create(inline_item_ids: user_inline_item_id, price: calculate_bill )
     @user_cart = current_user.inline_items.where(status: "non-checkedout").update_all(status: "checkedout")
@@ -46,13 +63,16 @@ class OrdersController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_order
+
+
     @order = Order.find(params[:id])
 
   end
 
   # Only allow a list of trusted parameters through.
   def order_params
-    params.require(:order).permit(:user_id, :status, :price )
+    params.require(:order).permit(:user_id, :status, :price, :search )
+
   end
 
   def calculate_bill
@@ -87,4 +107,5 @@ class OrdersController < ApplicationController
     #  ids of cart items
     user_inline_items.pluck(:id)
   end
+
 end

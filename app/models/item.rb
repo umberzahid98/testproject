@@ -2,18 +2,25 @@
 
 # class of items that the admin will create
 class Item < ApplicationRecord
+  scope :permited_items, -> { where(status: "permit") }
   has_many :category_items
   has_many :categories, through: :category_items, dependent: :destroy
   # after_save :hide_modal
   # validates_associated :categories
 
   has_one_attached :image
+  validates :status, presence: true
   validates :title, presence: true, uniqueness: true
   validates :description, presence: true
   validates :price, numericality: { only_float: true, greater_than: 0 }
   validate :save_object?
 
-
+  enum status: %i[permit not_permit]
+  # setting the default status at hte time of creation
+  after_initialize :set_default_status, if: :new_record?
+  def set_default_status
+    self.status ||= :permit
+  end
 
   # validate :no_category
   # validate :image_type
