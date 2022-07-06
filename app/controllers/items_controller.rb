@@ -10,7 +10,7 @@ class ItemsController < ApplicationController
       if current_user.admin?
         @items = Item.all
       else
-        @items=Item.permited_items
+        @items = Item.permited_items
       end
     end
 
@@ -24,8 +24,15 @@ class ItemsController < ApplicationController
       @cart = Cart.find_by(id: session[:cart_id])
       InlineItem.where(cart: session[:cart_id]).update_all(user_id: current_user.id) if @cart
     else
-      @cart = Cart.create
-      session[:cart_id] = @cart.id
+        @cart=Cart.find_by(id: session[:cart_id])
+        if @cart
+        else
+          @cart = Cart.create
+          session[:cart_id] = @cart.id
+        end
+      # @cart = Cart.create
+      # session[:cart_id] = @cart.id
+      # above two lines were only present in this else
 
     end
 

@@ -11,6 +11,7 @@
 
                                 <%= form_with( model:inline_item , remote: true) do |t| %>
                                     <%= t.hidden_field :quantity, :value=> (inline_item.quantity)-1 %>
+                                    <%= t.hidden_field :id, :value=> inline_item.id %>
                                     <%= t.submit "-", class:"btn btn-danger mr-2" %>
                                   <% end %>
 
@@ -18,6 +19,7 @@
 
                                 <%= form_with( model:inline_item , remote: true) do |t| %>
                                   <%= t.hidden_field :quantity, :value=> inline_item.quantity+1 %>
+                                  <%= t.hidden_field :id, :value=> inline_item.id %>
                                   <%= t.submit "+" , class:"btn btn-primary ml-2"%>
 
                                 <% end %>
