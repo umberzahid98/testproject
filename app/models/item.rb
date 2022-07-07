@@ -22,8 +22,12 @@ class Item < ApplicationRecord
     self.status ||= :permit
   end
 
+  def thumbnail
+    self.image.variant(resize: '50x50!').processed
+  end
+
   # validate :no_category
-  # validate :image_type
+  validate :image_type
 
   private
 
@@ -39,7 +43,7 @@ class Item < ApplicationRecord
     end
   end
 
-  # def image_type
-  #   errors.add(:image, 'is missing') if (image.attached?) == false
-  # end
+  def image_type
+    errors.add(:image, 'is missing') if (image.attached?) == false
+  end
 end
