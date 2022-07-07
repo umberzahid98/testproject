@@ -7,6 +7,9 @@
       <%elsif order.cancelled?%>
       <h6 style="color:red">cancelled x</h6>
       <%else%>
+
+   <%if current_user%>
+      <%if current_user.admin?%>
         <h6 class="mt-3">Change Status: </h6>
         <%if order.ordered? || order.paid? %>
           <%= form_with( model:order , remote: false) do |t| %>
@@ -28,6 +31,9 @@
                 <%= t.submit "Mark as Completed", class:"btn completed_button  mr-2" %>
           <% end %>
         <%end%>
+<%end%>
+<%end%>
+
       <%end%>
 
 

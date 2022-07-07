@@ -10,13 +10,21 @@
         <%# <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="#">Home</a>
         </li> %>
+        <%if current_user%>
+          <%if current_user.user?%>
+            <li class="nav-item">
+            <%= link_to "My Cart", carts_index_path, class:"nav-link"%>
+            </li>
+          <%end%>
+        <%end%>
+        <%if current_user%>
+          <%if current_user.user?%>
+            <li class="nav-item">
+            <%= link_to "My Orders", orders_path, class:"nav-link"%>
+            </li>
+          <%end%>
+        <%end%>
 
-        <li class="nav-item">
-        <%= link_to "My Cart", carts_index_path, class:"nav-link"%>
-        </li>
-        <li class="nav-item">
-        <%= link_to "My Orders", orders_path, class:"nav-link"%>
-        </li>
         <%if current_user%>
           <%if current_user.admin?%>
             <li class="nav-item">
@@ -29,9 +37,13 @@
         <li class="nav-item">
         <%= link_to "Items", items_path, class:"nav-link"%>
         </li>
-        <li class="nav-item">
-        <%= link_to "Category", categories_path, class:"nav-link"%>
-        </li>
+        <%if current_user%>
+          <%if current_user.admin?%>
+            <li class="nav-item">
+            <%= link_to "Category", categories_path, class:"nav-link"%>
+            </li>
+          <%end%>
+        <%end%>
 
 
 

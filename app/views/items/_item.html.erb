@@ -12,27 +12,37 @@
       </div>
 
       <div>
-      <%if item.permit?%>
-        <%a="Retire Item"%>
-      <%else%>
-        <%a="mark as available"%>
-      <%end%>
 
-        <%= form_with( model:item , remote: true) do |t| %>
-            <%if item.permit?%>
-              <%= t.hidden_field :status, :value=> "not_permit" %>
-            <%else%>
-              <%= t.hidden_field :status, :value=> "permit" %>
-            <%end%>
-            <%= t.submit a, class:"btn btn-danger mr-2" %>
-        <% end %>
+   <%if current_user%>
+      <%if current_user.admin?%>
+        <%if item.permit?%>
+          <%a="Retire Item"%>
+        <%else%>
+          <%a="mark as available"%>
+        <%end%>
+
+          <%= form_with( model:item , remote: true) do |t| %>
+              <%if item.permit?%>
+                <%= t.hidden_field :status, :value=> "not_permit" %>
+              <%else%>
+                <%= t.hidden_field :status, :value=> "permit" %>
+              <%end%>
+              <%= t.submit a, class:"btn btn-danger mr-2" %>
+          <% end %>
+      <%end%>
+    <%end%>
+
       </div>
       <br>
       <div class="btn-group" role="group" aria-label="...">
-        <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#myupdateitem_<%= item.id%>">
-        Edit
-        </button>
-        <%= link_to 'Destroy', item, method: :delete, class: "btn btn-danger", remote: true%>
+        <%if current_user%>
+          <%if current_user.admin?%>
+            <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#myupdateitem_<%= item.id%>">
+            Edit
+            </button>
+          <%end%>
+        <%end%>
+
 
       </div>
       <br><br>
@@ -53,9 +63,13 @@
               <input hidden name="inline_item[price]" value="<%=item.price%>"/>
           </div>
           <input hidden name="_method" value="POST">
+      <%if current_user%>
+        <%if current_user.user?%>
           <button type="submit" class="btn btn-primary">Add to cart</button>
-      <% end %>
-    <%else%>
+        <%end%>
+      <%end%>
+    <% end %>
+  <%else%>
     <div class="ml-5" style="color:white;
   background-color:rgb(117, 207, 39) ;
   border-bottom-left-radius: 0.5rem;
