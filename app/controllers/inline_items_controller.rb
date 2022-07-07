@@ -60,18 +60,20 @@ class InlineItemsController < ApplicationController
       @inline_item = InlineItem.create(inline_item_params.merge!(cart: @cart.id))
       @inline_item.save(validate: false)
     end
-    respond_to do |format|
+    # if i use js it perfoms only the first time
+    # respond_to do |format|
 
-      format.js
-    end
+    #   format.js
+    # end
+    redirect_to '/items'
+
   end
 
   private
   # Use callbacks to share common setup or constraints between actions.
   def set_inline_item
 
-puts "this is  curretn user"
-puts current_user
+
     if current_user
       @inline_item = InlineItem.find(params[:id])
 
