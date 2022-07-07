@@ -45,18 +45,24 @@ class InlineItemsController < ApplicationController
     @user_inline_items = user_inline_item
 
     respond_to do |format|
-      format.html { redirect_to items_url, notice: 'Item was successfully destroyed.' }
+      format.html { redirect_to inline_items_url, notice: 'Item was successfully destroyed.' }
       format.json { head :no_content }
       format.js
     end
   end
   def create
     # byebug
+    @items = Item.all
+    @item = Item.new
     if current_user
       @inline_item = InlineItem.create(inline_item_params.merge!(cart: @cart.id, user_id: current_user.id))
     else
       @inline_item = InlineItem.create(inline_item_params.merge!(cart: @cart.id))
       @inline_item.save(validate: false)
+    end
+    respond_to do |format|
+
+      format.js
     end
   end
 

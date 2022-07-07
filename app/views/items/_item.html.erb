@@ -1,4 +1,4 @@
-<div class="col-md-4  blog-main box text-center "  id="item_<%= item.id %>">
+<div class="col-md-4  blog-main box text-center center "  id="item_<%= item.id %>">
   <div  class="panel panel-info">
     <div class="panel-heading">
 
@@ -7,7 +7,7 @@
 
     </div>
 
-    <div class="panel-body">
+    <div class="panel-body center">
       <div style="color: #3BB2D6;"><%= time_ago_in_words(item.created_at)%>
       </div>
 
@@ -41,18 +41,34 @@
       </div>
     </div>
   </div>
+
+
   <%if item.permit?%>
-    <%= form_with(model: @inline_item, remote: false) do |f| %>
-        <div class="field">
-            <%# <%= f.label :title%>
-            <input hidden name="inline_item[item_id]" value="<%=item.id%>"/>
-            <input hidden name="inline_item[quantity]" value="1"/>
-            <input hidden name="inline_item[price]" value="<%=item.price%>"/>
-        </div>
-        <input hidden name="_method" value="POST">
-        <button type="submit" class="btn btn-primary">Add to cart</button>
-    <% end %>
+    <%if !(present_in_cart?(item))%>
+      <%= form_with(model: @inline_item, remote: true) do |f| %>
+          <div class="field">
+              <%# <%= f.label :title%>
+              <input hidden name="inline_item[item_id]" value="<%=item.id%>"/>
+              <input hidden name="inline_item[quantity]" value="1"/>
+              <input hidden name="inline_item[price]" value="<%=item.price%>"/>
+          </div>
+          <input hidden name="_method" value="POST">
+          <button type="submit" class="btn btn-primary">Add to cart</button>
+      <% end %>
+    <%else%>
+    <div class="ml-5" style="color:white;
+  background-color:rgb(117, 207, 39) ;
+  border-bottom-left-radius: 0.5rem;
+  border-top-left-radius: 0.5rem;
+  border-bottom-right-radius: 0.5rem;
+  border-top-right-radius: 0.5rem;">Added</div>
+
+    <%end%>
+
   <%else%>
+
+
+
     <div style="width:120px;  margin-left: 8vw!important;" class="btn-danger mt-4">"Retired"</div>
   <%end%>
 
