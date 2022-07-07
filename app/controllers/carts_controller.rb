@@ -3,6 +3,7 @@
 # cart controller
 class CartsController < ApplicationController
   def index
+    authorize Cart
     @user_inline_items=user_inline_item
     @order = Order.new
   end

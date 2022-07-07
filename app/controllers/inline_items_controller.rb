@@ -3,10 +3,11 @@ class InlineItemsController < ApplicationController
   before_action :set_cart, only: %i[create]
 
   def index
-
+    authorize InlineItem
     @inline_items = InlineItem.all
   end
   def update
+    authorize InlineItem
 
 
     user = !current_user.nil?
@@ -41,6 +42,7 @@ class InlineItemsController < ApplicationController
     @inline_item = Inline_Item.new
   end
   def destroy
+    authorize InlineItem
     @inline_item.destroy
     @user_inline_items = user_inline_item
 
@@ -51,6 +53,7 @@ class InlineItemsController < ApplicationController
     end
   end
   def create
+    authorize InlineItem
     # byebug
     @items = Item.all
     @item = Item.new

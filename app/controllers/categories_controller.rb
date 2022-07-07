@@ -3,6 +3,7 @@
 # category controller
 class CategoriesController < ApplicationController
   def index
+    authorize Category
     @categories = Category.all
     @category = Category.new
     @count = 0
@@ -20,6 +21,9 @@ class CategoriesController < ApplicationController
   def edit; end
 
   def create # rubocop:disable Metrics/MethodLength
+
+    authorize Category
+
     @categories = Category.all
     @category = Category.create(category_params)
     @count = 0

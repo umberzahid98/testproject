@@ -6,6 +6,7 @@ class ItemsController < ApplicationController
 
   # GET /items or /items.json
   def index
+
     if current_user
       if current_user.admin?
         @items = Item.all
@@ -51,6 +52,7 @@ class ItemsController < ApplicationController
 
   # POST /items or /items.json
   def create # rubocop:disable Metrics/MethodLength
+    authorize Item
     @item = Item.create(item_params)
     respond_to do |format|
       if @item.save
@@ -67,6 +69,7 @@ class ItemsController < ApplicationController
 
   # PATCH/PUT /items/1 or /items/1.json
   def update
+    authorize Item
 
     if params{item[:status]}
 

@@ -5,6 +5,7 @@ class OrdersController < ApplicationController
   before_action :set_order, only: %i[show edit update destroy]
 
   def index
+    authorize Order
     if current_user.admin?
       @orders = Order.all.order(:created_at)
     else
@@ -21,6 +22,7 @@ class OrdersController < ApplicationController
   def show; end
 
   def update
+    authorize Order
     # created_at: :desc
     @orders = Order.all.order(:created_at)
     respond_to do |format|
@@ -41,7 +43,7 @@ class OrdersController < ApplicationController
   end
   # rubocop:disable Metrics/MethodLength
   def create
-
+    authorize Order
     if(!user_inline_item_id.empty?)
     @order = current_user.orders.create(inline_item_ids: user_inline_item_id, price: calculate_bill )
 
