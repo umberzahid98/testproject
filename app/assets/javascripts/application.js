@@ -29,7 +29,7 @@ $(function(){
     $(".item_price_create").val('')
     $("#my_image_create").val(null)
     });
-  $("#newcategoryclose").on("click",function(){
+    $("#newcategoryclose").on("click",function(){
     $("#category-updated-errors").empty()
     });
 });

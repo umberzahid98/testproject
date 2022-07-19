@@ -7,6 +7,6 @@ class SearchController < ApplicationController
     # it will return all of the search reslts
     @items = @query.result(distinct: true)
     @searched_category = params[:selected_category]
-    @searched_category = "" if @searched_category.nil?
+    @searched_category = '' if @searched_category.nil?
   end
 end

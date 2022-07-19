@@ -7,7 +7,6 @@ class ApplicationController < ActionController::Base
   rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
   before_action :set_query
   before_action :user_permit, if: :devise_controller?
-  # include Pundit
   def set_query
     @query = Item.ransack(params[:q])
   end
@@ -27,7 +26,7 @@ class ApplicationController < ActionController::Base
   protected
 
   def user_permit
-    devise_parameter_sanitizer.permit(:sign_up, keys: %i[full_name display_name ])
-    devise_parameter_sanitizer.permit(:account_update, keys: %i[full_name display_name ])
+    devise_parameter_sanitizer.permit(:sign_up, keys: %i[full_name display_name])
+    devise_parameter_sanitizer.permit(:account_update, keys: %i[full_name display_name])
   end
 end

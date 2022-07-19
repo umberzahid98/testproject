@@ -9,4 +9,8 @@ class OrderPolicy < ApplicationPolicy
   def create?
     user?
   end
+
+  def update?
+    admin?
+  end
 end

@@ -2,7 +2,7 @@
 
 # devise user creation migration
 class DeviseCreateUsers < ActiveRecord::Migration[5.2]
-  def change # rubocop:disable Metrics/MethodLength
+  def change
     create_table :users do |t|
       ## Database authenticatable
       t.string :email,              null: false, default: ''

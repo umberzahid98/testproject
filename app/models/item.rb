@@ -13,7 +13,7 @@ class Item < ApplicationRecord
   validate :save_object?
   validate :image_type
 
-  enum status: %i[permit not_permit]
+  enum status: { permit: 0, not_permit: 1 }
   # setting the default status at the time of creation
   after_initialize :set_default_status, if: :new_record?
   def set_default_status

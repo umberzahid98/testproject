@@ -64,7 +64,9 @@ group :test do
   gem 'chromedriver-helper'
 end
 gem 'rubocop', require: false
+gem 'rubocop-performance'
 gem 'rubocop-rails'
+gem 'rubocop-rspec'
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'devise', '~> 4.8', '>= 4.8.1'
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]

@@ -1,5 +1,4 @@
 $("#flash").html('<%= j render partial: "shared/notice_banner" %>');
-
 $("#container_inline_items").empty().append(` <%if @user_inline_items%>
         <%= j render :partial => "carts/inline_item", :collection => @user_inline_items%>
       <%end%>`)

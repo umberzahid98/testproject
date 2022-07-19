@@ -10,7 +10,7 @@ class User < ApplicationRecord
   validates :full_name, presence: true
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :confirmable
-  enum role: %i[user admin]
+  enum role: { user: 0, admin: 1 }
   after_initialize :set_default_role, if: :new_record?
   def set_default_role
     self.role ||= :user

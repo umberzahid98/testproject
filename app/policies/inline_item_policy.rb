@@ -2,7 +2,15 @@
 
 # inline item policy
 class InlineItemPolicy < ApplicationPolicy
-  def index?
-    admin? || user?
+  def update?
+    user?
+  end
+
+  def create?
+    user?
+  end
+
+  def destroy?
+    user?
   end
 end

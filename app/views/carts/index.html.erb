@@ -11,10 +11,10 @@
   <%end%>
   <div class="md-col-6">
     <%if current_user%>
-    <%= form_with(model:@order, remote: true ) do |t| %>
-    <input hidden name="_method" value="POST">
-    <button type="submit" class="btn btn-primary">checkout</button>
-    <% end %>
+      <%= form_with(model:@order, remote: true ) do |t| %>
+      <input hidden name="_method" value="POST">
+      <button type="submit" class="btn btn-primary">checkout</button>
+      <% end %>
     <%end%>
   </div>
 </div>

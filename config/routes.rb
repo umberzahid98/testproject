@@ -1,25 +1,15 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  # get 'carts/index'
-  # get 'orders/new'
-  # get 'categories/index'
-  # get 'items/index'
-  # get 'homes/about'
-  root to: 'homes#index'
-  resources :orders
-  resources :carts
-  resources :inline_items
-  resources :items
-  resources :categories
-  resources :homes
+  root to: 'populate_carts#index'
+  resources :orders, only: %i[index update show create]
+  resources :carts, only: %i[create index]
+  resources :inline_items, only: %i[update create destroy]
+  resources :items, only: %i[show index create update]
+  resources :categories, only: %i[index create]
+  resources :populate_carts, only: [:index]
   resources :search, only: [:index]
 
-
-  # get 'search', to: 'search#index'
-  resources :orders do
-    get :search_for_members, on: :collection
-  end
   devise_for :users, controllers: {
     sessions: 'users/sessions'
   }

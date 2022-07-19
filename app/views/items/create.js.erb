@@ -1,5 +1,4 @@
 $("#flash").html('<%= j render partial: "shared/notice_banner" %>');
-
 <%if @item.errors.full_messages.any?%>
   $("#item-new-errors").empty().append(
   `
